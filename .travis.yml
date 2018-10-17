@@ -11,7 +11,7 @@ install:
   - chmod +x scripts/sfml_install.sh
   - ./scripts/sfml_install.sh
   # --user bypasses the need for the sudo level of authority.
-  - python setup.py sdist bdist_wheel --user
+  - python setup.py --user sdist bdist_wheel
 #   # Handles the push to pypi.
 #   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
