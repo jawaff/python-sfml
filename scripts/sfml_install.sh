@@ -10,5 +10,5 @@ wget https://www.sfml-dev.org/files/SFML-2.3.2-linux-gcc-64-bit.tar.gz
 tar -xvzf SFML-2.3.2-linux-gcc-64-bit.tar.gz -C extlibs/
 
 # Compile time environment variables for gcc.
-export CPPFLAGS="-I$CUR_DIR/extLibs/SFML-2.3.2/lib"
-export LIBRARY_PATH="$CUR_DIR/extLibs/SFML-2.3.2/lib"
+export CPPFLAGS="-I$CUR_DIR/extlibs/SFML-2.3.2/lib"
+export LIBRARY_PATH="$CUR_DIR/extlibs/SFML-2.3.2/lib"
