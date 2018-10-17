@@ -1,0 +1,28 @@
+language: python
+python:
+  - "2.7"
+  - "3.7-dev"
+
+notifications:
+  email: false
+
+install:
+  - pip install -r requirements.txt
+  - chmod +x scripts/sfml_install.sh
+  - ./scripts/sfml_install.sh
+  # --user bypasses the need for the sudo level of authority.
+  - python setup.py sdist bdist_wheel --user
+#   # Handles the push to pypi.
+#   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+
+# script:
+#   TODO: Explore integration testing.
+#   - pytest cython_example_proj
+  
+# deploy:
+#   provider: pypi
+#   user: jawaff
+#   password:
+#     secure: <SOME_KEY>
+#   on:
+#     branch: master
