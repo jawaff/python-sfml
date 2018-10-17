@@ -7,7 +7,7 @@ wget https://www.sfml-dev.org/files/SFML-2.3.2-linux-gcc-64-bit.tar.gz
 
 # SFML-2.3.2 is the directory that is placed into extLibs/.
 # The SFML dir contains an include/, lib/ and share/ directory.
-tar -xvzf SFML-2.3.2-linux-gcc-64-bit.tar.gz -C extLibs/
+tar -xvzf SFML-2.3.2-linux-gcc-64-bit.tar.gz -C extlibs/
 
 # Compile time environment variables for gcc.
 export CPPFLAGS="-I$CUR_DIR/extLibs/SFML-2.3.2/lib"
