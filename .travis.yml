@@ -11,6 +11,8 @@ install:
   - chmod +x scripts/sfml_install.sh
   # The '.' executes this script within the current shell.
   - . scripts/sfml_install.sh
+  - echo "CPPFLAGS=$CPPFLAGS"
+  - echo "LIBRARY_PATH=$LIBRARY_PATH"
   # --user bypasses the need for the sudo level of authority.
   - python setup.py sdist bdist_wheel
 #   # Handles the push to pypi.
