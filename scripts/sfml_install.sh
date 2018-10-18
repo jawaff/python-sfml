@@ -26,8 +26,5 @@ echo "Setting up environment variables for SFML:"
 export CPPFLAGS="-I$SFML_DIR/include"
 export LIBRARY_PATH="$SFML_DIR/lib"
 
-echo "ls CPPFLAGS=$CPPFLAGS"
-ls "$SFML_DIR/include"
-
-echo "ls LIBRARY_PATH=$LIBRARY_PATH"
-ls $LIBRARY_PATH
+echo "CPPFLAGS=$CPPFLAGS"
+echo "LIBRARY_PATH=$LIBRARY_PATH"
