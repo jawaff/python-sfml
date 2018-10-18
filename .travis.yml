@@ -3,27 +3,36 @@ matrix:
   - os: linux
     language: python
     python: "2.7"
-    # The '.' executes this script within the current shell.
-    before_install: chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh
+    install: python setup.py sdist bdist_wheel
   - os: linux
     language: python
     python: "3.7-dev"
-    # The '.' executes this script within the current shell.
-    before_install: chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh
+    install: python setup.py sdist bdist_wheel
+  - os: windows
+    language: generic
+    install: python2 --version
+  - os: windows
+    language: generic
+    install: python --version
+
+before_install:
+  - chmod +x scripts/sfml_install.sh
+  # The '.' executes this script within the current Bash shell.
+  - . scripts/sfml_install.sh $TRAVIS_OS_NAME
+  - pip install -r requirements.txt
+    
     
     
 notifications:
   email: false
 
 install:
-  - pip install -r requirements.txt
-  # --user bypasses the need for the sudo level of authority.
-  - python setup.py sdist bdist_wheel
+  echo "Attempt at a common install command!"
 #   # Handles the push to pypi.
 #   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
 script:
--  echo "Warning We current have no success check in the .travis.yml file."
+-  ls dist/
 #   TODO: Explore integration testing.
 #   - pytest cython_example_proj
   
