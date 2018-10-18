@@ -1,13 +1,13 @@
 matrix:
   include:
-  - os: linux
-    language: python
-    python: "2.7"
-    install: python setup.py sdist bdist_wheel
-  - os: linux
-    language: python
-    python: "3.7-dev"
-    install: python setup.py sdist bdist_wheel
+  # - os: linux
+  #   language: python
+  #   python: "2.7"
+  #   install: python setup.py sdist bdist_wheel
+  # - os: linux
+  #   language: python
+  #   python: "3.7-dev"
+  #   install: python setup.py sdist bdist_wheel
   - os: windows
     # Travis' Windows Env doesn't support a Python language.
     language: bash
@@ -15,17 +15,18 @@ matrix:
     install: 
       python2 --version
       pip2 --version
-  - os: windows
-    # Travis' Windows Env doesn't support a Python language.
-    language: bash
-    install: 
-      python --version
-      pip --version
+  # - os: windows
+  #   # Travis' Windows Env doesn't support a Python language.
+  #   language: bash
+  #   install: 
+  #     python --version
+  #     pip --version
 
 before_install:
   - chmod +x scripts/sfml_install.sh
   # The '.' executes this script within the current Bash shell.
   - . scripts/sfml_install.sh $TRAVIS_OS_NAME
+  - pip install wheel
   - pip install -r requirements.txt
     
     
