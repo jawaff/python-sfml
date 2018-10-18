@@ -1,20 +1,31 @@
 #!/usr/bin/env bash
 
+# Retrieves the directory of this script.
+CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+SFML_VERSION="2.3.2"
+EXT_LIBS_DIR="$CUR_DIR/extlibs"
+SFML_DIR="$EXT_LIBS_DIR/SFML-$SFML_VERSION"
+
+echo "Downloading SFML-$SFML_VERSION:"
+
 wget https://www.sfml-dev.org/files/SFML-2.3.2-linux-gcc-64-bit.tar.gz
+
+echo "Extracting SFML-$SFML_VERSION into $EXT_LIBS_DIR:"
 
 # SFML-2.3.2 is the directory that is placed into extLibs/.
 # The SFML dir contains an include/, lib/ and share/ directory.
-tar -xvzf SFML-2.3.2-linux-gcc-64-bit.tar.gz -C extlibs/
+tar -xvzf SFML-2.3.2-linux-gcc-64-bit.tar.gz -C $EXT_LIBS_DIR
 
-# Retrieves the directory of this script.
-CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+ls EXT_LIBS_DIR
+
+echo "Setting up environment variables for SFML:"
 
 # Compile time environment variables for gcc.
-export CPPFLAGS="-I$CUR_DIR/extlibs/SFML-2.3.2/include"
-export LIBRARY_PATH="$CUR_DIR/extlibs/SFML-2.3.2/lib"
+export CPPFLAGS="-I$SFML_DIR/include"
+export LIBRARY_PATH="$SFML_DIR/lib"
 
 echo "ls CPPFLAGS=$CPPFLAGS"
-ls $CPPFLAGS
+ls "$SFML_DIR/include"
 
 echo "ls LIBRARY_PATH=$LIBRARY_PATH"
 ls $LIBRARY_PATH
