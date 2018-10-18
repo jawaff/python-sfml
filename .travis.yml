@@ -26,7 +26,11 @@ before_install:
   - chmod +x scripts/sfml_install.sh
   # The '.' executes this script within the current Bash shell.
   - . scripts/sfml_install.sh $TRAVIS_OS_NAME
-  - pip install wheel
+  - echo $PATH
+  - echo $PYTHONPATH
+  - python --version
+  - python2 --version
+  - python2 get-pip.py
   - pip install -r requirements.txt
     
     
