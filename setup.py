@@ -128,9 +128,9 @@ network = extension(
 major, minor, _, _ , _ = sys.version_info
 
 data_files = []
-if platform.system() == 'Windows':
-    dlls = [("Lib\\site-packages\\sfml", glob('extlibs\\SFML-2.3.2\\bin'))]
-    data_files += dlls
+#if platform.system() == 'Windows':
+#    dlls = [("Lib\\site-packages\\sfml", glob('extlibs\\SFML-2.3.2\\bin'))]
+#    data_files += dlls
 
 with open('README.md', 'r') as f:
     long_description = f.read()

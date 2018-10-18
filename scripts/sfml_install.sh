@@ -11,8 +11,8 @@ SFML_DIR="$EXT_LIBS_DIR/SFML-$SFML_VERSION"
 
 # Argumets
 CUR_OS="$1"
-echo "Current OS: $CUR_OS"
 
+echo "Current OS: $CUR_OS"
 if [ "$CUR_OS" = "linux" ]
 then
   TAR_FILENAME=SFML-$SFML_VERSION-linux-gcc-64-bit.tar.gz
@@ -28,15 +28,9 @@ else
 fi
 
 echo "Downloading: $TAR_FILENAME"
-
 wget "https://www.sfml-dev.org/files/$TAR_FILENAME"
 
 echo "Extracting SFML-$SFML_VERSION into $EXT_LIBS_DIR:"
-
-# "SFML-$SFML_VERSION" is the directory that is placed into extLibs/.
-# The SFML dir contains an include/, lib/ and share/ directory.
-
-
 if [ "$CUR_OS" = "windows" ]
 then
   unzip $TAR_FILENAME -d $EXT_LIBS_DIR
@@ -48,18 +42,20 @@ ls $EXT_LIBS_DIR
 ls $SFML_DIR
 
 echo "Setting up environment variables for SFML:"
-
 if [ "$CUR_OS" = "linux" ]
 then
   # Compile time environment variables for gcc.
-  export CPPFLAGS="-I$SFML_DIR/include"
-  export LIBRARY_PATH="$SFML_DIR/lib"
+  #set CPPFLAGS="-I$SFML_DIR/include"
+  #set LIBRARY_PATH="$SFML_DIR/lib"
   echo "CPPFLAGS=$CPPFLAGS"
   echo "LIBRARY_PATH=$LIBRARY_PATH"
 elif [ "$CUR_OS" = "windows" ]
 then
-  # https://stackoverflow.com/questions/16993927/using-cython-to-link-python-to-a-shared-library
-  echo "TODO"
+  # Compile time environment variables for mingw gcc
+  export CPPFLAGS="-I$SFML_DIR/include"
+  export LIBRARY_PATH="$SFML_DIR/lib"
+  echo "CPPFLAGS=$CPPFLAGS"
+  echo "LIBRARY_PATH=$LIBRARY_PATH"
 elif [ "$CUR_OS" = "osx" ]
 then
   echo "TODO"
@@ -68,4 +64,11 @@ else
   exit 1
 fi
 
-
+echo "Installing extra dependencies"
+if [ "$CUR_OS" = "windows" ]
+then
+  choco install python
+  choco install pip
+  python --version
+  pip --version
+fi

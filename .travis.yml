@@ -10,11 +10,9 @@ matrix:
   #   install: python setup.py sdist bdist_wheel
   - os: windows
     # Travis' Windows Env doesn't support a Python language.
-    language: generic
+    language: shell
     # The python version will have to be selected based off the executable that is used.
-    install: 
-      python2 --version
-      pip2 --version
+    install: python setup.py sdist bdist_wheel
   # - os: windows
   #   # Travis' Windows Env doesn't support a Python language.
   #   language: bash
@@ -26,11 +24,6 @@ before_install:
   - chmod +x scripts/sfml_install.sh
   # The '.' executes this script within the current Bash shell.
   - . scripts/sfml_install.sh $TRAVIS_OS_NAME
-  - echo $PATH
-  - echo $PYTHONPATH
-  - python --version
-  - python2 --version
-  - python2 get-pip.py
   - pip install -r requirements.txt
     
     
