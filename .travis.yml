@@ -23,7 +23,7 @@ install:
 #   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
 script:
--  echo "Warning: We current have no success check in the .travis.yml file."
+-  echo "Warning We current have no success check in the .travis.yml file."
 #   TODO: Explore integration testing.
 #   - pytest cython_example_proj
   
