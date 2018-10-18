@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Retrieves the directory of this script.
-CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+CUR_DIR=$SCRIPT_DIR/..
 SFML_VERSION="2.3.2"
 EXT_LIBS_DIR="$CUR_DIR/extlibs"
 SFML_DIR="$EXT_LIBS_DIR/SFML-$SFML_VERSION"
@@ -16,7 +17,8 @@ echo "Extracting SFML-$SFML_VERSION into $EXT_LIBS_DIR:"
 # The SFML dir contains an include/, lib/ and share/ directory.
 tar -xvzf SFML-2.3.2-linux-gcc-64-bit.tar.gz -C $EXT_LIBS_DIR
 
-ls EXT_LIBS_DIR
+ls $EXT_LIBS_DIR
+ls $SFML_DIR
 
 echo "Setting up environment variables for SFML:"
 
