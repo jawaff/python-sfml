@@ -68,6 +68,6 @@ echo "Installing extra dependencies"
 if [ "$CUR_OS" = "windows" ]
 then
   choco install python
-  python --version
-  pip --version
+  python3 --version
+  pip3 --version
 fi
