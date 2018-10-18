@@ -39,10 +39,10 @@ script:
 #   TODO: Explore integration testing.
 #   - pytest cython_example_proj
   
-# deploy:
-#   provider: pypi
-#   user: jawaff
-#   password:
-#     secure: <SOME_KEY>
-#   on:
-#     branch: master
+deploy:
+  provider: pypi
+  user: jawaff
+  password:
+    secure: k2bIOVM4pxN0rDU/lqzrQnUHvxl5iHbg5KeQhldBN0BrniX+8almJKZEoOF7botj251iooU0WrGxTkkbaKdiByQz9bo8gfPyA/xvbGoAMIzuO1awIqNi8D6pHGFQAgGsIYtOar7+HUwBH88DZ5I9Y0Lps2Dewy4uAiulz4VTiT5mrmFER7OjSaL8ai/N5DGoHSbfWG7LZCuGOscE8SnYRG6V/v6dAflG6mNk1W/LOiijWMiX4bcghzGucxoaSc/mYqYbpPGJbLr9FR+2NcjyWAEYWRNfUY7nsr5cOresT/lEvQ2lTBm+m88cG2/qIJf4MFnChWTA1AmWMgylm1ZFywdNDeEUTBoSvXICMG+E9ajI1CqO3H2q8VtUNqPl7sREdj/Nev2ptDC9iysCLtjshpnqAZEufDrSTIxY5q7vEsbCiUCmM1htcdSVuMjk9MzNz+MMJsKEXCNAw8963I73hMOxmf2rluL4T1LgsCgD6KJ91cRmTpON/ZFaGy43peJLAOylmgAyCjzuaDYlosF+KNdYLra6CN3Zp+8gVOQHe0zzgJsN8J1z4mGaJBWnaIyU7BkDm9yTIwpbwmemAKcB6EeMO9PFTSeMEk2R2KoRN6x5nRGtoQajGx5yiDZjIg5LrYzkLbshpuaYuVr0wted06HMReV7QTksfZXbJb+u98I=
+  on:
+    branch: master
