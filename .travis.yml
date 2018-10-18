@@ -24,7 +24,7 @@ before_install:
   - chmod +x scripts/sfml_install.sh
   # The '.' executes this script within the current Bash shell.
   - . scripts/sfml_install.sh $TRAVIS_OS_NAME
-  - powershell -Command ./scripts/windows_env_setup.ps1
+  - powershell -ExecutionPolicy Bypass -Command ./scripts/windows_env_setup.ps1
     
 notifications:
   email: false
