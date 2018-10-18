@@ -1,17 +1,17 @@
-language: python
-python:
-  - "2.7"
-  - "3.7-dev"
-os:
-  - linux
-  - windows
+matrix:
+  include:
+  - os: linux
+    language: python
+    python:
+      - "2.7"
+      - "3.7-dev"
 
 notifications:
   email: false
   
 before_install:
   # The '.' executes this script within the current shell.
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh; fi
 
 install:
   - pip install -r requirements.txt
