@@ -10,7 +10,7 @@ matrix:
   #   install: python setup.py sdist bdist_wheel
   - os: windows
     # Travis' Windows Env doesn't support a Python language.
-    language: bash
+    language: generic
     # The python version will have to be selected based off the executable that is used.
     install: 
       python2 --version
