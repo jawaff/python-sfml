@@ -9,11 +9,18 @@ matrix:
     python: "3.7-dev"
     install: python setup.py sdist bdist_wheel
   - os: windows
-    language: generic
-    install: python2 --version
+    # Travis' Windows Env doesn't support a Python language.
+    language: bash
+    # The python version will have to be selected based off the executable that is used.
+    install: 
+      python2 --version
+      pip2 --version
   - os: windows
-    language: generic
-    install: python --version
+    # Travis' Windows Env doesn't support a Python language.
+    language: bash
+    install: 
+      python --version
+      pip --version
 
 before_install:
   - chmod +x scripts/sfml_install.sh

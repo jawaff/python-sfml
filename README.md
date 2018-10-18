@@ -1,4 +1,3 @@
-[comment]: <> (This is the Travics CI build status link for the master branch.)
 [![Build Status](https://travis-ci.org/jawaff/python-sfml.svg?branch=master)](https://travis-ci.org/jawaff/python-sfml)
 
 # PySFML - Python bindings for SFML
