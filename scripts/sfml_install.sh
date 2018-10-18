@@ -63,9 +63,3 @@ else
   echo ERROR: Unsupported OS Detected: $CUR_OS
   exit 1
 fi
-
-echo "Installing extra dependencies"
-if [ "$CUR_OS" = "windows" ]
-then
-  choco install python
-fi
