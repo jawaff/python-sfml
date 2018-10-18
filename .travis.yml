@@ -3,16 +3,17 @@ matrix:
   - os: linux
     language: python
     python: "2.7"
+    # The '.' executes this script within the current shell.
+    before_install: chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh
   - os: linux
     language: python
     python: "3.7-dev"
-
+    # The '.' executes this script within the current shell.
+    before_install: chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh
+    
+    
 notifications:
   email: false
-  
-before_install:
-  # The '.' executes this script within the current shell.
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh; fi
 
 install:
   - pip install -r requirements.txt
@@ -22,7 +23,7 @@ install:
 #   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
 script:
--  echo "The build probably succeeded."
+-  echo "Warning: We current have no success check in the .travis.yml file."
 #   TODO: Explore integration testing.
 #   - pytest cython_example_proj
   
