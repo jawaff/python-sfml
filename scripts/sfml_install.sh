@@ -13,5 +13,5 @@ CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 export CPPFLAGS="-I$CUR_DIR/extlibs/SFML-2.3.2/include"
 export LIBRARY_PATH="$CUR_DIR/extlibs/SFML-2.3.2/lib"
 
-echo $CPPFLAGS
-echo $LIBRARY_PATH
+echo "CPPFLAGS=$CPPFLAGS"
+echo "LIBRARY_PATH=$LIBRARY_PATH"

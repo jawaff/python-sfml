@@ -9,7 +9,8 @@ notifications:
 install:
   - pip install -r requirements.txt
   - chmod +x scripts/sfml_install.sh
-  - ./scripts/sfml_install.sh
+  # The '.' executes this script within the current shell.
+  - . scripts/sfml_install.sh
   # --user bypasses the need for the sudo level of authority.
   - python setup.py sdist bdist_wheel
 #   # Handles the push to pypi.
