@@ -1,0 +1,35 @@
+matrix:
+  include:
+  - os: linux
+    language: python
+    python: "2.7"
+  - os: linux
+    language: python
+    python: "3.7-dev"
+
+notifications:
+  email: false
+  
+before_install:
+  # The '.' executes this script within the current shell.
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh; fi
+
+install:
+  - pip install -r requirements.txt
+  # --user bypasses the need for the sudo level of authority.
+  - python setup.py sdist bdist_wheel
+#   # Handles the push to pypi.
+#   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+
+script:
+-  echo "The build probably succeeded."
+#   TODO: Explore integration testing.
+#   - pytest cython_example_proj
+  
+# deploy:
+#   provider: pypi
+#   user: jawaff
+#   password:
+#     secure: <SOME_KEY>
+#   on:
+#     branch: master
