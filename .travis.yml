@@ -2,9 +2,10 @@ matrix:
   include:
   - os: linux
     language: python
-    python:
-      - "2.7"
-      - "3.7-dev"
+    python: "2.7"
+  - os: linux
+    language: python
+    python: "3.7-dev"
 
 notifications:
   email: false
