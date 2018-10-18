@@ -2,20 +2,20 @@
 
 # Retrieves the directory of this script.
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-CUR_DIR=$SCRIPT_DIR/..
+CUR_DIR="$SCRIPT_DIR/.."
 SFML_VERSION="2.3.2"
 EXT_LIBS_DIR="$CUR_DIR/extlibs"
 SFML_DIR="$EXT_LIBS_DIR/SFML-$SFML_VERSION"
 
 echo "Downloading SFML-$SFML_VERSION:"
 
-wget https://www.sfml-dev.org/files/SFML-2.3.2-linux-gcc-64-bit.tar.gz
+wget https://www.sfml-dev.org/files/SFML-$SFML_VERSION-linux-gcc-64-bit.tar.gz
 
 echo "Extracting SFML-$SFML_VERSION into $EXT_LIBS_DIR:"
 
-# SFML-2.3.2 is the directory that is placed into extLibs/.
+# "SFML-$SFML_VERSION" is the directory that is placed into extLibs/.
 # The SFML dir contains an include/, lib/ and share/ directory.
-tar -xvzf SFML-2.3.2-linux-gcc-64-bit.tar.gz -C $EXT_LIBS_DIR
+tar -xvzf SFML-$SFML_VERSION-linux-gcc-64-bit.tar.gz -C $EXT_LIBS_DIR
 
 ls $EXT_LIBS_DIR
 ls $SFML_DIR
