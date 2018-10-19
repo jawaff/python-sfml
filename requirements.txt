@@ -1,2 +1,4 @@
+setuptools
 cython
 twine
+wheel

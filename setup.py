@@ -11,9 +11,9 @@ except ImportError:
     raise SystemExit
 
 if platform.architecture()[0] == "32bit":
-	arch = "x86"
+    arch = "x86"
 elif platform.architecture()[0] == "64bit":
-	arch = "x64"
+    arch = "x64"
 
 class CythonBuildExt(build_ext):
     """ Updated version of cython build_ext command to deal with the
@@ -71,27 +71,26 @@ class CythonBuildExt(build_ext):
 modules = ['system', 'window', 'graphics', 'audio', 'network']
 
 extension = lambda name, files, libs: Extension(
-	name='sfml.' + name,
-	sources= [os.path.join('src', 'sfml', name, filename) for filename in files],
-	include_dirs=[os.path.join('include', 'Includes')],
-	library_dirs=[os.path.join('extlibs', 'libs-msvc-universal', arch)] if sys.hexversion >= 0x03050000 else [],
-	language='c++',
-	libraries=libs,
-	define_macros=[('SFML_STATIC', '1')] if platform.system() == 'Windows' else [])
+    name='sfml.' + name,
+    sources= [os.path.join('src', 'sfml', name, filename) for filename in files],
+    include_dirs=[os.path.join('include', 'Includes'), os.path.join('extlibs', 'SFML-2.3.2', 'include')],
+    library_dirs=[os.path.join('extlibs', 'SFML-2.3.2', 'lib'), os.path.join('extlibs', 'libs-msvc-universal', arch)] if sys.hexversion >= 0x03050000 else [os.path.join('extlibs', 'SFML-2.3.2', 'lib')],
+    language='c++',
+    libraries=libs,
+    define_macros=[('SFML_STATIC', '1')] if platform.system() == 'Windows' else [])
 
 if platform.system() == 'Windows':
-	system_libs   = ['winmm', 'sfml-system-s']
-	window_libs   = ['user32', 'advapi32', 'winmm', 'sfml-system-s', 'gdi32', 'opengl32', 'sfml-window-s']
-	graphics_libs = ['user32', 'advapi32', 'winmm', 'sfml-system-s', 'gdi32', 'opengl32', 'sfml-window-s', 'freetype', 'jpeg', 'sfml-graphics-s']
-	audio_libs    = ['winmm', 'sfml-system-s', 'flac', 'vorbisenc', 'vorbisfile', 'vorbis', 'ogg', 'openal32', 'sfml-audio-s']
-	network_libs  = ['ws2_32', 'sfml-system-s', 'sfml-network-s']
+    system_libs      = ['winmm', 'sfml-system-s']
+    window_libs      = ['user32', 'advapi32', 'winmm', 'sfml-system-s', 'gdi32', 'opengl32', 'sfml-window-s']
+    graphics_libs    = ['user32', 'advapi32', 'winmm', 'sfml-system-s', 'gdi32', 'opengl32', 'sfml-window-s', 'freetype', 'jpeg', 'sfml-graphics-s']
+    audio_libs       = ['winmm', 'sfml-system-s', 'flac', 'vorbisenc', 'vorbisfile', 'vorbis', 'ogg', 'openal32', 'sfml-audio-s']
+    network_libs     = ['ws2_32', 'sfml-system-s', 'sfml-network-s']
 else:
-	system_libs   = ['sfml-system']
-	window_libs   = ['sfml-system', 'sfml-window']
-	graphics_libs = ['sfml-system', 'sfml-window', 'sfml-graphics']
-	audio_libs    = ['sfml-system', 'sfml-audio']
-	network_libs  = ['sfml-system', 'sfml-network']
-
+    system_libs      = ['sfml-system']
+    window_libs      = ['sfml-system', 'sfml-window']
+    graphics_libs    = ['sfml-system', 'sfml-window', 'sfml-graphics']
+    audio_libs       = ['sfml-system', 'sfml-audio']
+    network_libs     = ['sfml-system', 'sfml-network']
 
 system = extension(
     'system',
@@ -120,17 +119,13 @@ network = extension(
 
 major, minor, _, _ , _ = sys.version_info
 
-data_files = []
-if platform.system() == 'Windows':
-    dlls = [("Lib\\site-packages\\sfml", glob('extlibs\\' + arch + '\\openal32.dll'))]
-    data_files += dlls
-
 with open('README.md', 'r') as f:
     long_description = f.read()
 
 ext_modules=[system, window, graphics, audio, network]
 
 install_requires = []
+data_files = []
 
 if sys.version_info < (3, 4):
     install_requires.append('enum34')

@@ -1,3 +1,7 @@
+env:
+  global:
+    - SFML_VERSION=2.3.2
+
 matrix:
   include:
   - os: linux
@@ -6,30 +10,40 @@ matrix:
   - os: linux
     language: python
     python: "3.7-dev"
+  - os: windows
+    # Travis' Windows Env doesn't support a Python language.
+    language: shell
 
+before_install:
+  - chmod +x scripts/sfml_install.sh
+  # The '.' executes this script within the current Bash shell.
+  - . scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
+  # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_VERSION='3.6.6'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_HOME='C:\Python36'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'; fi
+  # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
+    
 notifications:
   email: false
-  
-before_install:
-  # The '.' executes this script within the current shell.
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x scripts/sfml_install.sh && . scripts/sfml_install.sh; fi
 
 install:
   - pip install -r requirements.txt
-  # --user bypasses the need for the sudo level of authority.
   - python setup.py sdist bdist_wheel
 #   # Handles the push to pypi.
 #   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
 script:
--  echo "The build probably succeeded."
+-  ls dist/
 #   TODO: Explore integration testing.
 #   - pytest cython_example_proj
-  
-# deploy:
-#   provider: pypi
-#   user: jawaff
-#   password:
-#     secure: <SOME_KEY>
-#   on:
-#     branch: master
+
+deploy:
+  provider: pypi
+  user: jawaff
+  password:
+    secure: k2bIOVM4pxN0rDU/lqzrQnUHvxl5iHbg5KeQhldBN0BrniX+8almJKZEoOF7botj251iooU0WrGxTkkbaKdiByQz9bo8gfPyA/xvbGoAMIzuO1awIqNi8D6pHGFQAgGsIYtOar7+HUwBH88DZ5I9Y0Lps2Dewy4uAiulz4VTiT5mrmFER7OjSaL8ai/N5DGoHSbfWG7LZCuGOscE8SnYRG6V/v6dAflG6mNk1W/LOiijWMiX4bcghzGucxoaSc/mYqYbpPGJbLr9FR+2NcjyWAEYWRNfUY7nsr5cOresT/lEvQ2lTBm+m88cG2/qIJf4MFnChWTA1AmWMgylm1ZFywdNDeEUTBoSvXICMG+E9ajI1CqO3H2q8VtUNqPl7sREdj/Nev2ptDC9iysCLtjshpnqAZEufDrSTIxY5q7vEsbCiUCmM1htcdSVuMjk9MzNz+MMJsKEXCNAw8963I73hMOxmf2rluL4T1LgsCgD6KJ91cRmTpON/ZFaGy43peJLAOylmgAyCjzuaDYlosF+KNdYLra6CN3Zp+8gVOQHe0zzgJsN8J1z4mGaJBWnaIyU7BkDm9yTIwpbwmemAKcB6EeMO9PFTSeMEk2R2KoRN6x5nRGtoQajGx5yiDZjIg5LrYzkLbshpuaYuVr0wted06HMReV7QTksfZXbJb+u98I=
+  on:
+    branch: master

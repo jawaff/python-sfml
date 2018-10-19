@@ -1,3 +1,5 @@
+TravisCI Build Status: [![Build Status](https://travis-ci.org/jawaff/python-sfml.svg?branch=master)](https://travis-ci.org/jawaff/python-sfml)
+
 # PySFML - Python bindings for SFML
 
 This is version **2.3.2** of the official Python bindings for **SFML**, based on SFML 2.3.2, and is made available under the terms of the **zlib/libpng** license.
