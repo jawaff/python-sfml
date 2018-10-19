@@ -15,3 +15,6 @@ $SCRIPTS_DIR=$PSScriptRoot
 # Downloads pip into $PYTHON_SCRIPTS
 & $PYTHON_EXE "$SCRIPTS_DIR\get-pip.py"
 
+# Installs the Visual Studio 14 (2015) compiler
+& choco install vcbuildtools
+

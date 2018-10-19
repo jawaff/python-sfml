@@ -46,17 +46,11 @@ echo "Setting up environment variables for SFML:"
 if [ "$CUR_OS" = "linux" ]
 then
   # Compile time environment variables for gcc.
-  #set CPPFLAGS="-I$SFML_DIR/include"
-  #set LIBRARY_PATH="$SFML_DIR/lib"
+  set CPPFLAGS="-I$SFML_DIR/include"
+  set LIBRARY_PATH="$SFML_DIR/lib"
   echo "CPPFLAGS=$CPPFLAGS"
   echo "LIBRARY_PATH=$LIBRARY_PATH"
-elif [ "$CUR_OS" = "windows" ]
-then
-  echo "No variables needed in the Bash environment"
 elif [ "$CUR_OS" = "osx" ]
 then
   echo "TODO"
-else
-  echo ERROR: Unsupported OS Detected: $CUR_OS
-  exit 1
 fi
