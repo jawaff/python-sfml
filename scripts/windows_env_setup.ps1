@@ -2,7 +2,8 @@
 
 $PYTHON_HOME="C:\\Pyton37"
 $ENV:PATH=$ENV:PATH + ";$PYTHON_HOME"
-ls $ENV:PATH
+
+echo $ENV:PATH
 
 # Refreshes environment variables updated by choco.
 refreshenv
