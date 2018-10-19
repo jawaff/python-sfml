@@ -1,14 +1,14 @@
-& choco install python
-
-$PYTHON_HOME="C:\Pyton37"
+# Variables describing expected environment
+$PYTHON_HOME='C:\Python37'
+$PYTHON_SCRIPTS="$PYTHON_HOME\Scripts"
 $PYTHON_EXE="$PYTHON_HOME\python.exe"
 $SCRIPTS_DIR=$PSScriptRoot
 
-& $PYTHON_EXE --version
+# Installs Python into $PYTHON_HOME
+& choco install python
+
+# Downloads pip into $PYTHON_SCRIPTS
 & $PYTHON_EXE "$SCRIPTS_DIR\get-pip.py"
 
-# Refreshes environment variables updated by choco.
-refreshenv
-
-python --version
-pip --version
+# Updates the PATH variable for the outer shell.
+$ENV:PATH=$ENV:PATH + ";$PYTHON_HOME;$PYTHON_SCRIPTS"
