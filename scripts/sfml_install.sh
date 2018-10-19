@@ -52,11 +52,7 @@ then
   echo "LIBRARY_PATH=$LIBRARY_PATH"
 elif [ "$CUR_OS" = "windows" ]
 then
-  # Compile time environment variables for mingw gcc
-  export CPPFLAGS="-I$SFML_DIR/include"
-  export LIBRARY_PATH="$SFML_DIR/lib"
-  echo "CPPFLAGS=$CPPFLAGS"
-  echo "LIBRARY_PATH=$LIBRARY_PATH"
+  echo "No variables needed in the Bash environment"
 elif [ "$CUR_OS" = "osx" ]
 then
   echo "TODO"
