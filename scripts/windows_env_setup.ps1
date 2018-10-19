@@ -19,3 +19,6 @@ $SCRIPTS_DIR=$PSScriptRoot
 # Installs the Visual Studio 14 (2015) compiler
 & choco install vcbuildtools
 
+
+# The VS2017 direrctory needs to be deleted so that it doesn't interfere with the VS2015 build.
+Remove-Item "C:\Program Files (x86)\Microsoft Visual Studio\2017" -Force -Recurse

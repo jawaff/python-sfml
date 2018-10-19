@@ -18,15 +18,16 @@ before_install:
   - chmod +x scripts/sfml_install.sh
   # The '.' executes this script within the current Bash shell.
   - . scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
-  # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_VERSION='3.6.6'; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_HOME='C:\Python36'; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'; fi
-  # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
-  # The VS2017 direrctory needs to be deleted so that it doesn't interfere with the VS2015 build.
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -rf "C:\Program Files (x86)\Microsoft Visual Studio\2017" ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; 
+  then 
+    # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
+    export PYTHON_VERSION='3.6.6';
+    export PYTHON_HOME='C:\Python36';
+    export VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin';
+    # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
+    powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_VERSION $PYTHON_HOME;
+    export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH";
+  fi
     
 notifications:
   email: false
