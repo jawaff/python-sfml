@@ -39,9 +39,6 @@ else
   tar -xvzf $TAR_FILENAME -C $EXT_LIBS_DIR
 fi
 
-ls $EXT_LIBS_DIR
-ls $SFML_DIR
-
 echo "Setting up environment variables for SFML:"
 if [ "$CUR_OS" = "linux" ]
 then

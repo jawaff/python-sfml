@@ -18,17 +18,18 @@ before_install:
   - chmod +x scripts/sfml_install.sh
   # The '.' executes this script within the current Bash shell.
   - . scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
-    # Sets up the python/pip environment that is expected later in this script for Windows.
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_HOME='C:\Python37'; fi
+  # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_VERSION='3.6.6'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_HOME='C:\Python36'; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_HOME; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PATH:$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN"; fi
+  # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_HOME $PYTHON_VERSION; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
     
 notifications:
   email: false
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then echo "$VS14_BIN"; fi
   - pip install -r requirements.txt
   - python setup.py sdist bdist_wheel
 #   # Handles the push to pypi.
