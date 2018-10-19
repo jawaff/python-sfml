@@ -1,12 +1,12 @@
 & choco install python
 
 $PYTHON_HOME="C:\Pyton37"
-$ENV:PATH=$ENV:PATH + ";$PYTHON_HOME;$PYTHON_HOME\Scripts"
+$PYTHON_EXE="$PYTHON_HOME\python.exe"
+$SCRIPTS_DIR="$PSScriptRoot"
 
-echo $ENV:PATH
+$PYTHON_EXE --version
 
-python --version
-pip --version
+$PYTHON_EXE $SCRIPTS_DIR\get-pip.py
 
 # Refreshes environment variables updated by choco.
 refreshenv
