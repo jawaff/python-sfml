@@ -25,6 +25,8 @@ before_install:
   # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
+  # The VS2017 direrctory needs to be deleted so that it doesn't interfere with the VS2015 build.
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -rf "C:\Program Files (x86)\Microsoft Visual Studio\2017" ; fi
     
 notifications:
   email: false
