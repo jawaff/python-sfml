@@ -11,7 +11,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 CUR_DIR="$SCRIPT_DIR/.."
 EXT_LIBS_DIR="$CUR_DIR/extlibs"
 SFML_DIR="$EXT_LIBS_DIR/SFML-$SFML_VERSION"
-SFML_DOWNLOAD_PAGE="https://www.sfml-dev.org/files/4"
+SFML_DOWNLOAD_PAGE="https://www.sfml-dev.org/files/"
 
 echo "Current OS: $CUR_OS"
 if [ "$CUR_OS" = "linux" ]
@@ -43,8 +43,8 @@ echo "Setting up environment variables for SFML:"
 if [ "$CUR_OS" = "linux" ]
 then
   # Compile time environment variables for gcc.
-  set CPPFLAGS="-I$SFML_DIR/include"
-  set LIBRARY_PATH="$SFML_DIR/lib"
+  export CPPFLAGS="-I$SFML_DIR/include"
+  export LIBRARY_PATH="$SFML_DIR/lib"
   echo "CPPFLAGS=$CPPFLAGS"
   echo "LIBRARY_PATH=$LIBRARY_PATH"
 elif [ "$CUR_OS" = "osx" ]
