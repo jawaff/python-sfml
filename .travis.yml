@@ -10,7 +10,10 @@ matrix:
     # Travis' Windows Env doesn't support a Python language.
     language: shell
     # Sets up the python/pip environment that is expected later in this script.
-    before_install: powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1
+    before_install: 
+      - export PYTHON_HOME='C:\Python37'
+      - powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_HOME
+      - export PATH="$PATH;$PYTHON_HOME;$PYTHON_HOME\Scripts"
 
 before_install:
   - chmod +x scripts/sfml_install.sh
