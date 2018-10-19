@@ -134,6 +134,7 @@ kwargs = dict(
             ext_modules=ext_modules,
             package_dir={'': 'src'},
             packages=['sfml'],
+            data_files=[],
             version='2.3.2.dev1',
             description='Python bindings for SFML',
             long_description=long_description,
