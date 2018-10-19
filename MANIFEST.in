@@ -3,3 +3,5 @@ recursive-include src *.hpp
 recursive-include include *
 include extlibs/x86/openal32.dll
 include extlibs/x64/openal32.dll
+include versioneer.py
+include src/sfml/_version.py
