@@ -31,19 +31,15 @@ notifications:
 
 install:
   - pip install -r requirements.txt
-  - python setup.py sdist bdist_wheel
-#   # Handles the push to pypi.
-#   - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+  - python setup.py build
 
 script:
--  ls dist/
-#   TODO: Explore integration testing.
-#   - pytest cython_example_proj
+-  ls build/
 
 deploy:
   provider: pypi
   user: jawaff
   password:
-    secure: k2bIOVM4pxN0rDU/lqzrQnUHvxl5iHbg5KeQhldBN0BrniX+8almJKZEoOF7botj251iooU0WrGxTkkbaKdiByQz9bo8gfPyA/xvbGoAMIzuO1awIqNi8D6pHGFQAgGsIYtOar7+HUwBH88DZ5I9Y0Lps2Dewy4uAiulz4VTiT5mrmFER7OjSaL8ai/N5DGoHSbfWG7LZCuGOscE8SnYRG6V/v6dAflG6mNk1W/LOiijWMiX4bcghzGucxoaSc/mYqYbpPGJbLr9FR+2NcjyWAEYWRNfUY7nsr5cOresT/lEvQ2lTBm+m88cG2/qIJf4MFnChWTA1AmWMgylm1ZFywdNDeEUTBoSvXICMG+E9ajI1CqO3H2q8VtUNqPl7sREdj/Nev2ptDC9iysCLtjshpnqAZEufDrSTIxY5q7vEsbCiUCmM1htcdSVuMjk9MzNz+MMJsKEXCNAw8963I73hMOxmf2rluL4T1LgsCgD6KJ91cRmTpON/ZFaGy43peJLAOylmgAyCjzuaDYlosF+KNdYLra6CN3Zp+8gVOQHe0zzgJsN8J1z4mGaJBWnaIyU7BkDm9yTIwpbwmemAKcB6EeMO9PFTSeMEk2R2KoRN6x5nRGtoQajGx5yiDZjIg5LrYzkLbshpuaYuVr0wted06HMReV7QTksfZXbJb+u98I=
+    secure: g9Kw8i/BT37JMOlNZMa7LStu2G8nWqkTkvBQjPMjYsxRwLCMhRMExyRJDLs6bruM56WmLFvl7jsHF4LWxOr2oN0uG+lOQxGy+ug580WJD/hlxKk19D0MreB1UUEuEDPlsdjIu+eTlqYEEqKN0PutoIzpWxXsCrnWYcCzS36Lbwf2UCsYgqYb34GT470ye49aezGPxIj43GGICtXzVdIRTKR9N9vyFrgXrxw1NMjPdacCWFaxH8Nr0BlCaM+Zfb+HgWqIbpk7lD6uZQO/WURdEEyNefooddthiB/h2yocxzhSPheYZJD+IXwpCHEtgo1Z4TXsrU5tT62lmeCEDgvUWWvDr9mJjTIExg5PkvYBjWKv6yUmY7LPrw+JFCzbF1fm1VmcPdMNhh1kJf2GxvvyVOIW5DPF4dhgkU5t3SLS1v3OQAoXAhYCoRAkdM1Dcdud814DRUiM0psTv6ZW0tnr72Rw7QFfXPjnwJv8LjvYpkT/QPdFte/AmvoY3WdrCsUEBcor8Dygi8yNvY5cOqS3RFFQ43SpZroxEwtryKTJm3DLZhtjwzcH8iHM6QhnIQKplPIdyC3r0X7XJghepc2JxtnPSp+8p47xK2CCOf0IAjd47U8cmOzqp74g2Ma6Onvb353KfubO8jo7gFfYtZ1wrqeW4i4nxpE+cjwqaPqiu9U=
   on:
     branch: master

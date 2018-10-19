@@ -131,12 +131,12 @@ if sys.version_info < (3, 4):
     install_requires.append('enum34')
 
 kwargs = dict(
-            name='pySFML',
+            name='pySFMLTest',
             ext_modules=ext_modules,
             package_dir={'': 'src'},
             packages=['sfml'],
             data_files=data_files,
-            version='2.3.2.dev1',
+            version='2.3.2.dev2',
             description='Python bindings for SFML',
             long_description=long_description,
             author='Jonathan de Wachter',
