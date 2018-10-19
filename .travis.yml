@@ -17,14 +17,12 @@ before_install:
     # Sets up the python/pip environment that is expected later in this script for Windows.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PYTHON_HOME='C:\Python37'; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_env_setup.ps1 $PYTHON_HOME; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PATH;$PYTHON_HOME;$PYTHON_HOME\Scripts"; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PATH:$PYTHON_HOME:$PYTHON_HOME\Scripts"; fi
     
 notifications:
   email: false
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then echo "PYTHON_HOME=$PYTHON_HOME"; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then echo "PATH=$PATH"; fi
   - pip install -r requirements.txt
   - python setup.py sdist bdist_wheel
 #   # Handles the push to pypi.
