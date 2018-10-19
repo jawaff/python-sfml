@@ -1,8 +1,8 @@
-choco install python
+& choco install python
 
-$PYTHON_HOME="C:\Pyton37"
-ls "$PYTHON_HOME"
-$ENV:PATH = $ENV:PATH + ";$PYTHON_HOME"
+$PYTHON_HOME="C:\\Pyton37"
+$ENV:PATH=$ENV:PATH + ";$PYTHON_HOME"
+ls $ENV:PATH
 
 # Refreshes environment variables updated by choco.
 refreshenv
