@@ -1,6 +1,7 @@
 import sys, os, platform
 import os.path, shutil
 from glob import glob
+import versioneer
 from subprocess import call
 from setuptools import setup, Command, Extension
 
@@ -136,7 +137,7 @@ kwargs = dict(
             package_dir={'': 'src'},
             packages=['sfml'],
             data_files=data_files,
-            version='2.3.2.dev2',
+            version=versioneer.get_version(),
             description='Python bindings for SFML',
             long_description=long_description,
             author='Jonathan de Wachter',
@@ -157,6 +158,9 @@ kwargs = dict(
                         'Topic :: Software Development :: Libraries :: Python Modules'],
             keywords='sfml SFML simple fast multimedia system window graphics audio network pySFML PySFML python-sfml',
             install_requires=install_requires,
-            cmdclass={'build_ext': CythonBuildExt})
+            cmdclass={
+              'build_ext': CythonBuildExt,
+              'version': versioneer.get_cmdclass(),
+            })
 
 setup(**kwargs)
