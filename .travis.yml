@@ -1,12 +1,7 @@
 env:
   global:
     - SFML_VERSION=2.3.2
-    # Windows Constants
-    # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
-    - PYTHON_VERSION=3.6.6
-    - PYTHON_HOME='C:\Python36'
-    - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
-
+    
 # Caches are only shared by builds with the same OS and environment variables.
 # Thus this OS specific dependency directory can safely be cached.
 cache:
@@ -26,6 +21,12 @@ matrix:
     - os: windows
       # Travis' Windows Env doesn't support a Python language.
       language: shell
+      env:
+        # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
+        - PYTHON_VERSION=3.6.6
+        - PYTHON_HOME='C:\Python36'
+        - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
+
       
 before_install:
   - chmod +x scripts/sfml_install.sh
