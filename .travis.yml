@@ -44,7 +44,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_base_install.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
   # The '.' executes this script within the current Bash shell -- allows environment variable updates.
   - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
-  # This has to be set within the .travis scipt in order to persist into the install phase.
+  # Windows requires environment vaiables to be updated in this scope.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
     
 notifications:
@@ -58,12 +58,12 @@ script:
 -  ls build/
 
 before_deploy:
-  # Versioneer creates these .pyc files during the build/test phase.
+  # Versioneer creates these .pyc files during the install phase.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi
   # The '.' executes this script within the current Bash shell -- allows environment variable updates.
   - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
-  # This has to be set within the .travis scipt in order to persist into the deploy phase.
+  # Windows requires environment vaiables to be updated in this scope.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
 
 deploy:
@@ -73,7 +73,10 @@ deploy:
   password:
     secure: uKgDHmH3lWednGmjayYTbTs9kcANeFUdNyXRniZJdhEr0yIp7izcTXy7huxisKpNHzv8mlwsWMpKKtCB4Hck44g63lCHgmETlIMGMM8CHT2syP2efo59DvdeXUXgCWL9FegdZ98g6HF6VK+cnEVMSLC14hDEYfiOFINUf3fpljwN0xD8nLLRKCpGD8rgjurCWG0U9OytnKkerwlDqR4/4RIpeNhMcttVaGTlinQFSME44wXeUDDVPyi7gt3w2vrveBDHv1buxLOjrMuEwsnj1cgJyvJ+b5F7i9FifIK1BxOCY2q9nS9O50sFh+oAZVz+Ranz/cHOuR9Wfpp0BHdw4sFAOLXFg9dyBC4Ks0HSpHBMmduZVc7US/RxEfYnTPDfPb1nNYW6gY7k6yJ9Hg0PK9GxMVeEYEGR6a2yplonAAfs2P2gogpcxbjCUMEaubhRo4+ylySBvCmFPYuwAL5np8fbHvGBQyxaxIlV8YjRhnfbn8a406toc2kWmHtrI4tvieaAYS/v7hVfcgkIwsipPefcp4qQLfvont26SLAzqraTJaf7baiAOj3hmSQ+QMkAoVoL05Ss2OFi47iL27wDPO+4xXNklprkERkImmr5z4/FheOLI9i0ZKWdK7XAue63IPeUBKXB6NY3E2WRHTXYynbCmEb1AIDnAHDK3W4AW8Y=
   on:
-    all_branches: true
-    # Tagged builds sometimes use the tag as the branch name. Thus the tag version format needs to be a supported deployment branch.
-    condition: $TRAVIS_BRANCH =~ ^master|v(\d+\.){2,3}\d+$
+    repo: jawaff/python-sfml
     tags: true
+    # Tagged builds sometimes use the tag as the branch name. Thus the tag version format needs to be a supported deployment branch.
+    branches:
+      only:
+        - master
+        - "v(\\d+\\.){2,3}\\d+"
