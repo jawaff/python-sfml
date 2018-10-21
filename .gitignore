@@ -30,3 +30,6 @@ __pycache__
 *.h
 
 *egg*
+
+# Dependencies
+extlibs/SFML*
