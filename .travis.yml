@@ -7,14 +7,22 @@ env:
     - PYTHON_HOME='C:\Python36'
     - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
 
+# Caches are only shared by builds with the same OS and environment variables.
+# Thus this OS specific dependency directory can safely be cached.
+cache:
+  directories:
+  - extlibs/SFML-$SFML_VERSION
+    
 matrix:
   include:
     - os: linux
       language: python
       python: 2.7
+      cache: pip
     - os: linux
       language: python
       python: 3.7-dev
+      cache: pip
     - os: windows
       # Travis' Windows Env doesn't support a Python language.
       language: shell
