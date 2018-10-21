@@ -40,8 +40,8 @@ script:
 
 before_deploy:
   # Versioneer creates these .pyc files during the build/test phase.
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm versioneer.pyc; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm __pycache__/versioneer*.pyc; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm versioneer.pyc 2> /dev/null; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm __pycache__/versioneer*.pyc 2> /dev/null; fi
   # The '.' executes this script within the current Bash shell -- allows environment variable updates.
   - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION $PYTHON_VERSION $PYTHON_HOME $VS14_BIN
 
