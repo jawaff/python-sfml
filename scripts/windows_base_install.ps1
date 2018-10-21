@@ -17,15 +17,7 @@ $SCRIPTS_DIR=$PSScriptRoot
 & $PYTHON_EXE "$SCRIPTS_DIR\get-pip.py"
 
 # Installs the Visual Studio 14 (2015) compiler if it doesn't already exist.
-$VS_DIR="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin"
-If(!(test-path $VS_DIR))
-{
-  & choco install vcbuildtools
-}
-Else
-{
-  echo "Already Installed: $VS_DIR"
-}
+& choco install vcbuildtools
 
 # The default VS2017 direrctory needs to be deleted so that it doesn't interfere with the VS2015 build.
 Remove-Item "C:\Program Files (x86)\Microsoft Visual Studio\2017" -Force -Recurse

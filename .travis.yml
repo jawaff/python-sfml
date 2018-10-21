@@ -31,9 +31,6 @@ matrix:
         - PYTHON_VERSION=3.6.6
         - PYTHON_HOME='C:\Python36'
         - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
-      cache:
-        directories:
-          - 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\'
       deploy:
         distributions: bdist_wheel
 
@@ -68,8 +65,6 @@ before_deploy:
   - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
   # This has to be set within the .travis scipt in order to persist into the deploy phase.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
-  - ls extlibs
-  - ls extlibs/SFML-$SFML_VERSION
 
 deploy:
   provider: pypi
