@@ -82,4 +82,4 @@ deploy:
     branches:
       only:
         - master
-        - /^v(\d+.){2,3}\d+$/
+        - /^v\d+\.\d+(\.\d+)?(\.\d+)?(-\S*)?$/
