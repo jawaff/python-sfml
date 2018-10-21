@@ -132,7 +132,7 @@ if sys.version_info < (3, 4):
     install_requires.append('enum34')
 
 kwargs = dict(
-            name='pySFMLTest',
+            name='pysfml',
             ext_modules=ext_modules,
             package_dir={'': 'src'},
             packages=['sfml'],
