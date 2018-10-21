@@ -3,10 +3,6 @@
 # Argumets
 CUR_OS="$1"
 SFML_VERSION="$2"
-# Windows Args
-PYTHON_VERSION="$3"
-PYTHON_HOME="$4"
-VS14_BIN="$5"
 
 # Retrieves the directory of this script.
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
@@ -27,9 +23,6 @@ then
 elif [ "$CUR_OS" = "osx" ]
 then
   echo "TODO"
-elif [ "$CUR_OS" = "windows" ]
-then
-  export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
 fi
 
 # No environment variables exist for linking the SFML dependency as far as I know.

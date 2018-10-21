@@ -27,7 +27,9 @@ before_install:
   # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_base_install.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
   # The '.' executes this script within the current Bash shell -- allows environment variable updates.
-  - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION $PYTHON_VERSION $PYTHON_HOME $VS14_BIN
+  - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
+  # This has to be set within the .travis scipt in order to persist into the install phase.
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
     
 notifications:
   email: false
@@ -41,10 +43,12 @@ script:
 
 before_deploy:
   # Versioneer creates these .pyc files during the build/test phase.
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm versioneer.pyc 2> /dev/null; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm __pycache__/versioneer*.pyc 2> /dev/null; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi
   # The '.' executes this script within the current Bash shell -- allows environment variable updates.
-  - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION $PYTHON_VERSION $PYTHON_HOME $VS14_BIN
+  - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
+  # This has to be set within the .travis scipt in order to persist into the deploy phase.
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
 
 deploy:
   provider: pypi
