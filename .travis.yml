@@ -7,6 +7,9 @@ env:
 cache:
   directories:
     - extlibs/SFML-$SFML_VERSION
+
+cache:
+  timeout: 180
     
 matrix:
   include:
@@ -79,4 +82,4 @@ deploy:
     branches:
       only:
         - master
-        - "v(\\d+\\.){2,3}\\d+"
+        - /^v(\d+.){2,3}\d+$/
