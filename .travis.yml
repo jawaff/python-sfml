@@ -37,8 +37,8 @@ script:
 -  ls build/
 
 before_deploy:
-  - ls
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ls __pycache__; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm versioneer.pyc; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm __pycache__/*.pyc; fi
 
 deploy:
   provider: pypi
