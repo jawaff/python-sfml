@@ -38,16 +38,3 @@ then
 else
   tar -xvzf $TAR_FILENAME -C $EXT_LIBS_DIR
 fi
-
-echo "Setting up environment variables for SFML:"
-if [ "$CUR_OS" = "linux" ]
-then
-  # Compile time environment variables for gcc.
-  export CPPFLAGS="-I$SFML_DIR/include"
-  export LIBRARY_PATH="$SFML_DIR/lib"
-  echo "CPPFLAGS=$CPPFLAGS"
-  echo "LIBRARY_PATH=$LIBRARY_PATH"
-elif [ "$CUR_OS" = "osx" ]
-then
-  echo "TODO"
-fi
