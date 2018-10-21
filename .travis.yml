@@ -78,8 +78,4 @@ deploy:
   on:
     repo: jawaff/python-sfml
     tags: true
-    # Tagged builds sometimes use the tag as the branch name. Thus the tag version format needs to be a supported deployment branch.
-    branches:
-      only:
-        - master
-        - /^v\d+\.\d+(\.\d+)?(\.\d+)?(-\S*)?$/
+    
