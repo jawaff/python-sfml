@@ -17,7 +17,7 @@ $SCRIPTS_DIR=$PSScriptRoot
 & $PYTHON_EXE "$SCRIPTS_DIR\get-pip.py"
 
 # Installs the Visual Studio 14 (2015) compiler if it doesn't already exist.
-$VS_HOME="C:\Program Files (x86)\Microsoft Visual Studio 14.0\"
+$VS_HOME="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin"
 If(!(test-path $VS_HOME))
 {
   & choco install vcbuildtools
