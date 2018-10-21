@@ -1,6 +1,7 @@
 env:
   global:
     - SFML_VERSION=2.3.2
+    # Windows Constants
     # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
     - PYTHON_VERSION=3.6.6
     - PYTHON_HOME='C:\Python36'
@@ -52,6 +53,8 @@ deploy:
   password:
     secure: uKgDHmH3lWednGmjayYTbTs9kcANeFUdNyXRniZJdhEr0yIp7izcTXy7huxisKpNHzv8mlwsWMpKKtCB4Hck44g63lCHgmETlIMGMM8CHT2syP2efo59DvdeXUXgCWL9FegdZ98g6HF6VK+cnEVMSLC14hDEYfiOFINUf3fpljwN0xD8nLLRKCpGD8rgjurCWG0U9OytnKkerwlDqR4/4RIpeNhMcttVaGTlinQFSME44wXeUDDVPyi7gt3w2vrveBDHv1buxLOjrMuEwsnj1cgJyvJ+b5F7i9FifIK1BxOCY2q9nS9O50sFh+oAZVz+Ranz/cHOuR9Wfpp0BHdw4sFAOLXFg9dyBC4Ks0HSpHBMmduZVc7US/RxEfYnTPDfPb1nNYW6gY7k6yJ9Hg0PK9GxMVeEYEGR6a2yplonAAfs2P2gogpcxbjCUMEaubhRo4+ylySBvCmFPYuwAL5np8fbHvGBQyxaxIlV8YjRhnfbn8a406toc2kWmHtrI4tvieaAYS/v7hVfcgkIwsipPefcp4qQLfvont26SLAzqraTJaf7baiAOj3hmSQ+QMkAoVoL05Ss2OFi47iL27wDPO+4xXNklprkERkImmr5z4/FheOLI9i0ZKWdK7XAue63IPeUBKXB6NY3E2WRHTXYynbCmEb1AIDnAHDK3W4AW8Y=
   distributions: sdist bdist_wheel
+  # Prevents Travis from deleting the downloaded SFML binaries.
+  skip_cleanup: true
   on:
     repo: jawaff/python-sfml
     branch: master
