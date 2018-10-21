@@ -41,5 +41,7 @@ then
   else
     tar -xvzf $TAR_FILENAME -C $EXT_LIBS_DIR
   fi
+else
+  echo "Already Installed: $SFML_DIR"
 fi
   
