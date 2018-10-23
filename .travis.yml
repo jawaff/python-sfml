@@ -18,14 +18,13 @@ matrix:
       python: 2.7
       cache: pip
       env:
-        # Only one sdist file can be published to pypi.
-        - DISTRIBUTIONS='sdist bdist_wheel'
+        - DISTRIBUTIONS='sdist'
     - os: linux
       language: python
       python: 3.7-dev
       cache: pip
       env:
-        - DISTRIBUTIONS='bdist_wheel'
+        - DISTRIBUTIONS='sdist'
     - os: windows
       # Travis' Windows Env doesn't support a Python language.
       language: shell
@@ -35,7 +34,7 @@ matrix:
         - PYTHON_HOME='C:\Python36'
         - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
         - PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
-        - DISTRIBUTIONS='bdist_wheel'
+        - DISTRIBUTIONS='sdist bdist_wheel'
 
       
 before_install:
@@ -60,7 +59,7 @@ before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi
   - rm -r build/
-  # We 
+  # We shall use the less hazardous git stash command so that the SFML binaries are intact for the build.
   - git stash
 
 deploy:
