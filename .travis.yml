@@ -79,5 +79,5 @@ deploy:
     # Restricts deployments to version tagged commits -- only valid versions allowed as well.
     tags: true
     all_branches: true
-    condition: $TRAVIS_TAG =~ /^v([0-9]+\.){2,3}[0-9]+$/
+    condition: $TRAVIS_TAG =~ ^v([0-9]+\.){2,3}[0-9]+(-\.+)?$
     
