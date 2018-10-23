@@ -57,7 +57,12 @@ install:
   - python setup.py build
 
 script:
--  ls build/
+  -  ls build/
+  - echo $TRAVIS_TAG
+  - if [[ $TRAVIS_TAG =~ /^v(\d+\.){2,3}\d+$/ ]]; then echo "First experiment succeeded!"; fi
+  - if [[ $TRAVIS_TAG =~ "v(\\d+\\.){2,3}\\d+$" ]]; then echo "Second experiment succeeded!"; fi
+  - if [[ "$TRAVIS_TAG" =~ /^v(\d+\.){2,3}\d+$/ ]]; then echo "Third experiment succeeded!"; fi
+  - if [[ "$TRAVIS_TAG" =~ "v(\\d+\\.){2,3}\\d+$" ]]; then echo "Fourth experiment succeeded!"; fi
 
 before_deploy:
   # Versioneer creates these .pyc files during the install phase.
@@ -67,11 +72,6 @@ before_deploy:
   - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
   # Windows requires environment vaiables to be updated in this scope.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
-  - echo $TRAVIS_TAG
-  - if [[ $TRAVIS_TAG =~ /^v(\d+\.){2,3}\d+$/ ]]; then echo "First experiment succeeded!"; fi
-  - if [[ $TRAVIS_TAG =~ "v(\\d+\\.){2,3}\\d+$" ]]; then echo "Second experiment succeeded!"; fi
-  - if [[ "$TRAVIS_TAG" =~ /^v(\d+\.){2,3}\d+$/ ]]; then echo "Third experiment succeeded!"; fi
-  - if [[ "$TRAVIS_TAG" =~ "v(\\d+\\.){2,3}\\d+$" ]]; then echo "Fourth experiment succeeded!"; fi
 
 deploy:
   provider: pypi
