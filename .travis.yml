@@ -68,6 +68,7 @@ deploy:
   password: $PYPI_PASSWORD
   distributions: $DISTRIBUTIONS
   on:
+    repo: jawaff/python-sfml
     # Restricts deployments to version tagged commits -- only valid versions allowed as well.
     tags: true
     all_branches: true

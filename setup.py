@@ -134,8 +134,10 @@ if sys.version_info < (3, 4):
     install_requires.append('enum34')
     
 if platform.system() == "Linux":
-    os.environ["CPPFLAGS"]="-I".format(os.path.join(SCRIPT_DIR, 'extlibs/SFML-2.3.2/include'))
+    os.environ["CPPFLAGS"]="-I{}".format(os.path.join(SCRIPT_DIR, 'extlibs/SFML-2.3.2/include'))
     os.environ["LIBRARY_PATH"]=os.path.join(SCRIPT_DIR, "extlibs/SFML-2.3.2/lib")
+    print("CPPFLAGS:", os.environ["CPPFLAGS"])
+    print("LIBRARY_PATH:", os.environ["LIBRARY_PATH"])
 
 kwargs = dict(
             name='python-sfml',
