@@ -139,8 +139,8 @@ if platform.system() == "Linux":
     print("CPPFLAGS:", os.environ["CPPFLAGS"])
     print("LIBRARY_PATH:", os.environ["LIBRARY_PATH"])
     
-print("ls ROOT_DIR/", os.listdir(SCRIPT_DIR))
-print("ls ROOT_DIR/extlibs/", os.listdir(os.path.join(SCRIPT_DIR, 'extlibs')))
+print("ls $ROOT_DIR/", os.listdir(SCRIPT_DIR))
+print("ls $ROOT_DIR/extlibs/", os.listdir(os.path.join(SCRIPT_DIR, 'extlibs')))
 
 kwargs = dict(
             name='python-sfml',

@@ -15,15 +15,10 @@ matrix:
   include:
     - os: linux
       language: python
-      python: 2.7
-      cache: pip
-      env:
-        - DISTRIBUTIONS='sdist'
-    - os: linux
-      language: python
       python: 3.7-dev
       cache: pip
       env:
+        # Pip doesn't support binary wheels yet. Twine throws errors and fails during the deploy phase.
         - DISTRIBUTIONS='sdist'
     - os: windows
       # Travis' Windows Env doesn't support a Python language.
@@ -34,7 +29,7 @@ matrix:
         - PYTHON_HOME='C:\Python36'
         - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
         - PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
-        - DISTRIBUTIONS='sdist bdist_wheel'
+        - DISTRIBUTIONS='bdist_wheel'
 
       
 before_install:
