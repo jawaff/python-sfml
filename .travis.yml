@@ -73,11 +73,10 @@ deploy:
   user: jawaff
   server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
   password:
-    secure: uKgDHmH3lWednGmjayYTbTs9kcANeFUdNyXRniZJdhEr0yIp7izcTXy7huxisKpNHzv8mlwsWMpKKtCB4Hck44g63lCHgmETlIMGMM8CHT2syP2efo59DvdeXUXgCWL9FegdZ98g6HF6VK+cnEVMSLC14hDEYfiOFINUf3fpljwN0xD8nLLRKCpGD8rgjurCWG0U9OytnKkerwlDqR4/4RIpeNhMcttVaGTlinQFSME44wXeUDDVPyi7gt3w2vrveBDHv1buxLOjrMuEwsnj1cgJyvJ+b5F7i9FifIK1BxOCY2q9nS9O50sFh+oAZVz+Ranz/cHOuR9Wfpp0BHdw4sFAOLXFg9dyBC4Ks0HSpHBMmduZVc7US/RxEfYnTPDfPb1nNYW6gY7k6yJ9Hg0PK9GxMVeEYEGR6a2yplonAAfs2P2gogpcxbjCUMEaubhRo4+ylySBvCmFPYuwAL5np8fbHvGBQyxaxIlV8YjRhnfbn8a406toc2kWmHtrI4tvieaAYS/v7hVfcgkIwsipPefcp4qQLfvont26SLAzqraTJaf7baiAOj3hmSQ+QMkAoVoL05Ss2OFi47iL27wDPO+4xXNklprkERkImmr5z4/FheOLI9i0ZKWdK7XAue63IPeUBKXB6NY3E2WRHTXYynbCmEb1AIDnAHDK3W4AW8Y=
+    secure: MTTYVUYhluJIiqMhGtnjyirs1aQLo5pMk02k/3oJpgL0m3MEfWZa5fh/ull7D7xH/1gR3wKt+FGP3sr+ihZLGzcJo2zeaA45bYEj7FR+T2G5bvxDgi9gpqCSUZgRvgl3/R/5YgdFH2YcYT1YgQc9X1klZ+4OzWMVm8UXTHcR0afZqSlBhFSaA94O5PgVs5CQmkHE5cuDrFPdD8yEp8xFH3YdBzb0FZzZjQ2IxQhiColyb8erHJviexMMEu2nt68W5R7iOrqVh+R943rXD/hYDV/kNGRDvjEGVty7mSVTocg7JeamDGQzJqGPu6kW0bnBE5HgdZ2xSv31UTFqYXfkuogeMQAWc+jbTmj998Uw/WEY1XYf6iZ3aMJe3ntyINZcgR5WlOQHATB2EyocH5MlvSzH35SjAObREto6of4Z9Brt2jjDmI7EhmuaBOtpB6TE15eYCuogboluxwB3yFhrVJjaM91Mg9y8izoYpgwf1mscVJSS56hrGgwjhwry8CkIYTAN7cfFma05e+jfTpKjTq3S1trhEgtgepQwxxIHbVdE+BgeSVIRyILB+uirUdlLhYSdmhYd+Gkv5Aty2NxdsiZAdwj2TfRQOknuEpsMrE1zEdGHogUB8PhPLSoZZoRhLXRwNgebPowkhgiHg2R3/edIBskl11sItG9/jGDtS8c=
   distributions: "$DISTRIBUTIONS"
   on:
     # Restricts deployments to version tagged commits -- only valid versions allowed as well.
     tags: true
     all_branches: true
     condition: $TRAVIS_TAG =~ ^v([0-9]+\.){2,3}[0-9]+(-\.+)?$
-    
