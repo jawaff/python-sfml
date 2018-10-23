@@ -13,12 +13,12 @@ $SCRIPTS_DIR=$PSScriptRoot
 
 # Expects Python is installed into $PYTHON_HOME -- not forced.
 # We specifically need a version of Python that is built with VS14
-& choco install python --version $PYTHON_VERSION --allow-downgrade
+choco install python --version $PYTHON_VERSION --allow-downgrade
 # Downloads pip into $PYTHON_SCRIPTS
-& $PYTHON_EXE "$SCRIPTS_DIR\get-pip.py"
+$PYTHON_EXE "$SCRIPTS_DIR\get-pip.py"
 
 # Installs the Visual Studio 14 (2015) compiler if it doesn't already exist.
-& choco install vcbuildtools
+choco install vcbuildtools
 
 # The default VS2017 direrctory needs to be deleted so that it doesn't interfere with the VS2015 build.
 Remove-Item "C:\Program Files (x86)\Microsoft Visual Studio\2017" -Force -Recurse

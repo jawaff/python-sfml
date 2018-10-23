@@ -26,6 +26,7 @@ matrix:
       cache: pip
       env:
         # Pip doesn't support binary wheels yet. Twine throws errors and fails during the deploy phase.
+        # Only one sdist can be published to pypi per version.
         - DISTRIBUTIONS='sdist'
     - os: windows
       # Travis' Windows Env doesn't support a Python language.

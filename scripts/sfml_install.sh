@@ -4,6 +4,12 @@
 CUR_OS="$1"
 SFML_VERSION="$2"
 
+if [ $CUR_OS == "" || $SFML_VERSION == ""]
+then
+  echo Usage: ./scripts/sfml_install.sh CUR_OS SFML_VERSION
+  exit 1
+fi
+
 # Retrieves the directory of this script.
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
