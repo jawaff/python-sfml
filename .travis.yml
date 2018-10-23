@@ -19,13 +19,13 @@ matrix:
       cache: pip
       env:
         # Only one sdist file can be published to pypi.
-        - DISTRIBUTIONS: sdist bdist_wheel
+        - DISTRIBUTIONS='sdist bdist_wheel'
     - os: linux
       language: python
       python: 3.7-dev
       cache: pip
       env:
-        - DISTRIBUTIONS: bdist_wheel
+        - DISTRIBUTIONS='bdist_wheel'
     - os: windows
       # Travis' Windows Env doesn't support a Python language.
       language: shell
@@ -34,7 +34,8 @@ matrix:
         - PYTHON_VERSION=3.6.6
         - PYTHON_HOME='C:\Python36'
         - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
-        - DISTRIBUTIONS: bdist_wheel
+        - PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
+        - DISTRIBUTIONS='bdist_wheel'
 
       
 before_install:
@@ -46,8 +47,6 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_base_install.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
   # The '.' executes this script within the current Bash shell -- allows environment variable updates.
   - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
-  # Windows requires environment vaiables to be updated in this scope.
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
     
 notifications:
   email: false
@@ -65,8 +64,6 @@ before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi
   # The '.' executes this script within the current Bash shell -- allows environment variable updates.
   - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
-  # Windows requires environment vaiables to be updated in this scope.
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"; fi
 
 deploy:
   provider: pypi
