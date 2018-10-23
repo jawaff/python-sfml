@@ -4,17 +4,17 @@
 CUR_OS="$1"
 SFML_VERSION="$2"
 
-if [ $CUR_OS == "" || $SFML_VERSION == ""]
+if [ $CUR_OS == "" ] || [ $SFML_VERSION == ""]
 then
   echo Usage: ./scripts/sfml_install.sh CUR_OS SFML_VERSION
   exit 1
 fi
 
 # Retrieves the directory of this script.
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # Install Constants
-CUR_DIR="$SCRIPT_DIR/.."
+CUR_DIR="$SCRIPTS_DIR/.."
 EXT_LIBS_DIR="$CUR_DIR/extlibs"
 SFML_DIR="$EXT_LIBS_DIR/SFML-$SFML_VERSION"
 SFML_DOWNLOAD_PAGE="https://www.sfml-dev.org/files/"

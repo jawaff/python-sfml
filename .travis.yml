@@ -43,7 +43,7 @@ before_install:
   # This works in any OS's bash environment so far.
   - ./scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
   # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_base_install.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./scripts/windows_base_install.sh $PYTHON_VERSION $PYTHON_HOME; fi
 
 install:
   # Downloads a special CentOS docker image for building manylinux wheels.
