@@ -18,7 +18,6 @@
 *.sql
 *.sqlite
 
-build
 
 install*
 
@@ -30,6 +29,10 @@ __pycache__
 *.h
 
 *egg*
+
+# Generated Directories
+dist
+build
 
 # Dependencies
 extlibs/SFML*

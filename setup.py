@@ -133,6 +133,8 @@ data_files = []
 if sys.version_info < (3, 4):
     install_requires.append('enum34')
     
+# Sets GCC environment variables for assumed SFML location -- scripts/sfml_install.sh uses that location.
+# This is required for deployment from Travis.
 if platform.system() == "Linux":
     os.environ["CPPFLAGS"]="-I{}".format(os.path.join(SCRIPT_DIR, 'extlibs/SFML-2.3.2/include'))
     os.environ["LIBRARY_PATH"]=os.path.join(SCRIPT_DIR, "extlibs/SFML-2.3.2/lib")
