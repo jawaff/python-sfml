@@ -60,7 +60,6 @@ before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi
   - rm -r build/
-  - rm -r dist/
 
 deploy:
   provider: pypi
@@ -68,6 +67,7 @@ deploy:
   server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
   # This environment variable can be set as a secret environment variable in the TravisCI project's settings.
   password: $PYPI_PASSWORD
+  # Prevents 'git stash' command that will remove the downloaded SFML binaries.
   skip_cleanup: true
   distributions: $DISTRIBUTIONS
   on:
