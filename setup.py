@@ -15,6 +15,8 @@ if platform.architecture()[0] == "32bit":
     arch = "x86"
 elif platform.architecture()[0] == "64bit":
     arch = "x64"
+    
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 class CythonBuildExt(build_ext):
     """ Updated version of cython build_ext command to deal with the
@@ -32,15 +34,15 @@ class CythonBuildExt(build_ext):
         module = os.path.basename(sources[0])[:-4]
 
         # prepare a list with all header files related to the module (*.hpp, *_api.h, *.h)
-        header_files = glob(os.path.join('src', 'sfml', module, '*.hpp'))
+        header_files = glob(os.path.join(SCRIPT_DIR, 'src', 'sfml', module, '*.hpp'))
 
-        header_files.append(os.path.join('src', 'sfml', module, module + '.h'))
-        header_files.append(os.path.join('src', 'sfml', module, module + '_api.h'))
+        header_files.append(os.path.join(SCRIPT_DIR, 'src', 'sfml', module, module + '.h'))
+        header_files.append(os.path.join(SCRIPT_DIR, 'src', 'sfml', module, module + '_api.h'))
 
         # deal with exceptions
         if module == "network":
-            header_files.remove(os.path.join('src', 'sfml', module, module + '.h'))
-            header_files.remove(os.path.join('src', 'sfml', module, module + '_api.h'))
+            header_files.remove(os.path.join(SCRIPT_DIR, 'src', 'sfml', module, module + '.h'))
+            header_files.remove(os.path.join(SCRIPT_DIR, 'src', 'sfml', module, module + '_api.h'))
 
         # create the temporary destination in the build directory
         destination = os.path.join(self.build_temp, 'include', 'pysfml', module)
@@ -73,9 +75,9 @@ modules = ['system', 'window', 'graphics', 'audio', 'network']
 
 extension = lambda name, files, libs: Extension(
     name='sfml.' + name,
-    sources= [os.path.join('src', 'sfml', name, filename) for filename in files],
-    include_dirs=[os.path.join('include', 'Includes'), os.path.join('extlibs', 'SFML-2.3.2', 'include')],
-    library_dirs=[os.path.join('extlibs', 'SFML-2.3.2', 'lib'), os.path.join('extlibs', 'libs-msvc-universal', arch)] if sys.hexversion >= 0x03050000 else [os.path.join('extlibs', 'SFML-2.3.2', 'lib')],
+    sources= [os.path.join(SCRIPT_DIR, 'src', 'sfml', name, filename) for filename in files],
+    include_dirs=[os.path.join(SCRIPT_DIR, 'include', 'Includes'), os.path.join(SCRIPT_DIR, 'extlibs', 'SFML-2.3.2', 'include')],
+    library_dirs=[os.path.join(SCRIPT_DIR, 'extlibs', 'SFML-2.3.2', 'lib'), os.path.join(SCRIPT_DIR, 'extlibs', 'libs-msvc-universal', arch)] if sys.hexversion >= 0x03050000 else [os.path.join(SCRIPT_DIR, 'extlibs', 'SFML-2.3.2', 'lib')],
     language='c++',
     libraries=libs,
     define_macros=[('SFML_STATIC', '1')] if platform.system() == 'Windows' else [])
@@ -130,6 +132,10 @@ data_files = []
 
 if sys.version_info < (3, 4):
     install_requires.append('enum34')
+    
+if platform.system() == "Linux":
+    os.environ["CPPFLAGS"]="-I".format(os.path.join(SCRIPT_DIR, 'extlibs/SFML-2.3.2/include'))
+    os.environ["LIBRARY_PATH"]=os.path.join(SCRIPT_DIR, "extlibs/SFML-2.3.2/lib")
 
 kwargs = dict(
             name='python-sfml',

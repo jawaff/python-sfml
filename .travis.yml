@@ -40,14 +40,11 @@ matrix:
       
 before_install:
   - chmod +x scripts/sfml_install.sh
-  - chmod +x scripts/env_setup.sh
   # This works in any OS's bash environment so far.
   - ./scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
   # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell -ExecutionPolicy RemoteSigned -File ./scripts/windows_base_install.ps1 $PYTHON_VERSION $PYTHON_HOME; fi
-  # The '.' executes this script within the current Bash shell -- allows environment variable updates.
-  - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
-    
+
 notifications:
   email: false
 
@@ -62,8 +59,6 @@ before_deploy:
   # Versioneer creates these .pyc files during the install phase.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi
-  # The '.' executes this script within the current Bash shell -- allows environment variable updates.
-  - . scripts/env_setup.sh $TRAVIS_OS_NAME $SFML_VERSION
 
 deploy:
   provider: pypi
