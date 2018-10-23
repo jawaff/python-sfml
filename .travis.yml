@@ -59,10 +59,7 @@ install:
 script:
   -  ls build/
   - echo $TRAVIS_TAG
-  - if [[ $TRAVIS_TAG =~ /^v(\d+\.){2,3}\d+$/ ]]; then echo "First experiment succeeded!"; fi
-  - if [[ $TRAVIS_TAG =~ "v(\\d+\\.){2,3}\\d+$" ]]; then echo "Second experiment succeeded!"; fi
-  - if [[ "$TRAVIS_TAG" =~ /^v(\d+\.){2,3}\d+$/ ]]; then echo "Third experiment succeeded!"; fi
-  - if [[ "$TRAVIS_TAG" =~ "v(\\d+\\.){2,3}\\d+$" ]]; then echo "Fourth experiment succeeded!"; fi
+  - if [[ $TRAVIS_TAG =~ /^v\d+\.\d+\.(\d+\.)?\d+$/ ]]; then echo "First experiment succeeded!"; fi
 
 before_deploy:
   # Versioneer creates these .pyc files during the install phase.
