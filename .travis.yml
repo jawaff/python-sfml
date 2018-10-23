@@ -39,6 +39,7 @@ matrix:
       
 before_install:
   - chmod +x scripts/sfml_install.sh
+  - chmod +x scripts/build_linux_wheels.sh
   # This works in any OS's bash environment so far.
   - ./scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
   # Sets up the python/pip/vs14 environment that is expected later in this script for Windows.
