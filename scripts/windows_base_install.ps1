@@ -3,7 +3,8 @@ param(
   [string]$PYTHON_HOME
 )
 
-echo "PythonHome=$PYTHON_HOME"
+echo "PYTHON_VERSION=$PYTHON_VERSION"
+echo "PYTHON_HOME=$PYTHON_HOME"
 
 # Variables describing expected environment
 $PYTHON_SCRIPTS="$PYTHON_HOME\Scripts"
