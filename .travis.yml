@@ -72,9 +72,9 @@ deploy:
   provider: pypi
   user: jawaff
   server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
-  password:
-    secure: abthLtD+GuIc7VHzLHH4H/yDPcUuFEymJLC6IPt3BNxYBSj4ae5k3gYQDTqb8kV95l0Qlz1PIEcNz/4LtWUoj+/NT3Hz3OWBbSkeHf60E6Xac+Vi9k6xJNnbt7lXrm3niL47DLWi7qvOPvQSKUoY1nbir/GjvGH6RYCoDExQxYFEGVx/WvIigX57jdPNMBptNfW5FDB+dMuvXVPbzThEL6F6QmNGusPB+W+aeSOtuz6c1btaJ1InXA6sVUW9UNUjqhj6OgDcyzT8T7WfcFgrXhNzc1t1kcQrQ2e6b42nDBrAQvrn32G8HyFr30RdUKAxE84w67NoVEDmJVvM3ZYfY/dv+9ybsaVeteJ0FdfqMI299rqsl7Jb0HqIlfmbB8nzlLH1Mo7Nbc/ywnJ2GL4jzt4LEwVG7Hf4Ay8LPNSIgXr+sZxmD+ezF28/tVALpHLRP0jGGn6o5bF994q8wwkyyCtMZTmpEvynQysmSOAyxbyBXZ5ankxpm+m84R+eIcnxiZiH3BKxnAN9v1Anuqo6jgh5PuDSWDsk0iKt2eI1rTjL4Dx1Qvjz4GZnTuyj9qjiICVDnaYahUKw9XOvbZcIpFZccvQ24Gcxzhbj5kQp1RnjTU3MVtzP95jz+B7nbBGO6cnivvTBHUYxSKuzt8UIKkQfEnjxLTtiD+SaJwQzMzA=
-  distributions: "$DISTRIBUTIONS"
+  # This environment variable can be set as a secret environment variable in the TravisCI project's settings.
+  password: $PYPI_PASSWORD
+  distributions: $DISTRIBUTIONS
   on:
     # Restricts deployments to version tagged commits -- only valid versions allowed as well.
     tags: true
