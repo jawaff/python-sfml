@@ -17,6 +17,7 @@ cache:
 matrix:
   include:
     - os: linux
+      language: shell
       sudo: required
       services:
         - docker
@@ -52,8 +53,10 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then python setup.py build; fi
 
 script:
+  - ls extlibs/
+  - ls extlibs/SFML-$SFML_VERSION
   # Executes manylinux wheel build on a CentOS docker image.
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run --rm -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/scripts/build_linux_wheels.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run --rm -v `pwd`:/io $DOCKER_IMAGE /io/scripts/build_linux_wheels.sh; fi
   # TODO Execute Windows Tests
 
 before_deploy:
