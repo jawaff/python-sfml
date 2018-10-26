@@ -37,7 +37,6 @@ matrix:
         # Only one sdist can be published to pypi per version.
         - DISTRIBUTIONS='sdist bdist_wheel'
 
-      
 before_install:
   - chmod +x scripts/sfml_install.sh
   - chmod +x scripts/build_linux_wheels.sh
