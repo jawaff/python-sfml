@@ -1,4 +1,4 @@
-TravisCI Build Status: [![Build Status](https://travis-ci.com/jawaff/python-sfml.svg?branch=master)](https://travis-ci.com/jawaff/python-sfml)
+TravisCI Build Status: [![Build Status](https://travis-ci.org/jawaff/python-sfml.svg?branch=master)](https://travis-ci.org/jawaff/python-sfml)
 
 # PySFML - Python bindings for SFML
 
