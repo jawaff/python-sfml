@@ -43,14 +43,11 @@ before_install:
 
 install:
   - ./scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
-  - if ! [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-      ./scripts/windows_base_install.sh $PYTHON_VERSION $PYTHON_HOME
-      pip install -r requirements.txt
-      python setup.py build;
-    else if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      # Downloads a special CentOS docker image for building manylinux wheels.
-      docker pull $DOCKER_IMAGE;
-    fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./scripts/windows_base_install.sh $PYTHON_VERSION $PYTHON_HOME; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then pip install -r requirements.txt; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then python setup.py build; fi
+  # Downloads a special CentOS docker image for building manylinux wheels.
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker pull $DOCKER_IMAGE; fi
 
 script:
   - ls extlibs/
@@ -60,11 +57,11 @@ script:
   # TODO Execute Windows Tests
 
 before_deploy:
-  if ! [[ $TRAVIS_TAG ]]; then
+  if [[ $TRAVIS_TAG ]]; then
     # Versioneer creates these .pyc files during the install phase.
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
-    if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi
-    rm -r build/
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi;
+    if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi;
+    rm -r build/;
     # We shall use the less hazardous git stash command so that the SFML binaries are intact for the build.
     git stash;
   fi
