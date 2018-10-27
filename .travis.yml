@@ -57,14 +57,12 @@ script:
   # TODO Execute Windows Tests
 
 before_deploy:
-  if [[ $TRAVIS_TAG ]]; then
-    # Versioneer creates these .pyc files during the install phase.
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi;
-    if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -r __pycache__; fi;
-    rm -r build/;
-    # We shall use the less hazardous git stash command so that the SFML binaries are intact for the build.
-    git stash;
-  fi
+  # Versioneer creates these .pyc files during the install phase.
+  - if ! [[ $TRAVIS_TAG ]] && [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
+  - if ! [[ $TRAVIS_TAG ]] && [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -rf __pycache__; fi
+  - if ! [[ $TRAVIS_TAG ]]; rm -r build/; fi
+  # We shall use the less hazardous git stash command so that the SFML binaries are intact for the build.
+  - if ! [[ $TRAVIS_TAG ]]; then git stash; fi
 
 deploy:
   provider: pypi
