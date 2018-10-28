@@ -44,7 +44,7 @@ before_install:
 install:
   - ./scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./scripts/windows_base_install.sh $PYTHON_VERSION $PYTHON_HOME; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then pip install -r requirements.txt; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then pip install -r requirements-dev.txt; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then python setup.py build; fi
   # Downloads a special CentOS docker image for building manylinux wheels.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker pull $DOCKER_IMAGE; fi

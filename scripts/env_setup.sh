@@ -19,6 +19,7 @@ then
   # Compile time environment variables for gcc.
   export CPPFLAGS="-I$SFML_DIR/include"
   export LIBRARY_PATH="$SFML_DIR/lib"
+  export LD_LIBRARY_PATH="$SFML_DIR/lib"
   echo "CPPFLAGS=$CPPFLAGS"
   echo "LIBRARY_PATH=$LIBRARY_PATH"
 elif [ "$CUR_OS" = "osx" ]
