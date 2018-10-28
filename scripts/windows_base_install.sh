@@ -19,6 +19,8 @@ SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 echo "PYTHON_VERSION=$PYTHON_VERSION"
 echo "PYTHON_HOME=$PYTHON_HOME"
 
+choco list -lo
+
 # Expects Python is installed into $PYTHON_HOME -- not forced.
 # We specifically need a version of Python that is built with VS14
 choco install python --version "$PYTHON_VERSION" --allow-downgrade
