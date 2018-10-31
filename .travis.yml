@@ -25,18 +25,6 @@ matrix:
         - DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
         # Wheels will be generated in the before_deploy phase.
         - DISTRIBUTIONS=''
-    - os: windows
-      # Travis' Windows Env doesn't support a Python language.
-      language: shell
-      env:
-        # We can only support up to Python 3.6.6, because our SFML-2.3.2 and Python 3.6.6 are compiled against VS14 (2015).
-        - PYTHON_VERSION=3.6.6
-        - PYTHON_HOME='C:\Python36'
-        - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
-        - PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
-        - CHOCO_EXE='C:\ProgramData\chocolatey\choco.exe'
-        # Only one sdist can be published to pypi per version.
-        - DISTRIBUTIONS='sdist bdist_wheel'
 
 before_install:
   - chmod +x scripts/sfml_install.sh
@@ -44,16 +32,10 @@ before_install:
 
 install:
   - ./scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then "$CHOCO_EXE" --help; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./scripts/windows_base_install.sh $PYTHON_VERSION $PYTHON_HOME; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then pip install -r requirements-dev.txt; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then python setup.py build; fi
   # Downloads a special CentOS docker image for building manylinux wheels.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker pull $DOCKER_IMAGE; fi
 
 script:
-  - ls extlibs/
-  - ls extlibs/SFML-$SFML_VERSION
   # Executes manylinux wheel build on a CentOS docker image.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run --rm -v `pwd`:/io $DOCKER_IMAGE /io/scripts/build_linux_wheels.sh $TRAVIS_OS_NAME $SFML_VERSION; fi
   # TODO Execute Windows Tests
@@ -61,7 +43,6 @@ script:
 before_deploy:
   # Versioneer creates these .pyc files during the install phase.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm -f versioneer.pyc; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm -rf __pycache__; fi
   - rm -r build/
   # We shall use the less hazardous git stash command so that the SFML binaries are intact for the build.
   - git stash
