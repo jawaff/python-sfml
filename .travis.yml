@@ -33,7 +33,7 @@ matrix:
         - PYTHON_VERSION=3.6.6
         - PYTHON_HOME='C:\Python36'
         - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
-        - PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
+        - PATH="C:\ProgramData\chocolatey\bin;$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
         # Only one sdist can be published to pypi per version.
         - DISTRIBUTIONS='sdist bdist_wheel'
 
