@@ -33,7 +33,8 @@ matrix:
         - PYTHON_VERSION=3.6.6
         - PYTHON_HOME='C:\Python36'
         - VS14_BIN='C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin'
-        - PATH="C:\ProgramData\chocolatey\bin;$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
+        - PATH="$PYTHON_HOME:$PYTHON_HOME\Scripts:$VS14_BIN:$PATH"
+        - CHOCO_EXE='C:\ProgramData\chocolatey\bin\choco.exe'
         # Only one sdist can be published to pypi per version.
         - DISTRIBUTIONS='sdist bdist_wheel'
 
@@ -43,7 +44,8 @@ before_install:
 
 install:
   - ./scripts/sfml_install.sh $TRAVIS_OS_NAME $SFML_VERSION
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ls 'C:\ProgramData\chocolatey'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then CHOCO_EXE --help; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then . CHOCO_EXE --help; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./scripts/windows_base_install.sh $PYTHON_VERSION $PYTHON_HOME; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then pip install -r requirements-dev.txt; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then python setup.py build; fi

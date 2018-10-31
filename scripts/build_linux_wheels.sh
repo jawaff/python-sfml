@@ -6,7 +6,7 @@ CUR_OS="$1"
 SFML_VERSION="$2"
 
 # Install a system package required by our library
-yum install -y atlas-devel openal-soft-devel libvorbis-devel
+yum install -y atlas-devel openal-soft-devel libvorbis-devel flac-devel
 
 # Compile wheels
 for PYBIN in /opt/python/*/bin; do
