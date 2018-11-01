@@ -38,7 +38,6 @@ install:
 script:
   # Executes manylinux wheel build on a CentOS docker image.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run --rm -v `pwd`:/io $DOCKER_IMAGE /io/scripts/build_linux_wheels.sh $TRAVIS_OS_NAME $SFML_VERSION; fi
-  # TODO Execute Windows Tests
 
 before_deploy:
   # Versioneer creates these .pyc files during the install phase.
